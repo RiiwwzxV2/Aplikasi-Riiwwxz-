@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Gateway - By : Riiwwxz Store</title>
+    <title>Payment Gateway - By Riiwwxz</title>
 
-    <!-- Style -->
     <style>
         body {
             margin: 0;
@@ -67,6 +66,233 @@
             background: rgba(3, 60, 26, 0.4);
             border-radius: 8px;
             border: 1px solid #0f8f4a;
+            margin-bottom: 10px;
+        }
+
+        #floatWA {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            background: #11c759;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 12px #11c759;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: #0f3b1e;
+            padding: 20px;
+            border-radius: 12px;
+            width: 85%;
+            max-width: 380px;
+            text-align: center;
+            box-shadow: 0 0 15px #0fa050;
+        }
+
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            color: #ff4d4d;
+            font-weight: bold;
+        }
+
+        .qris-img {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid #1ecc6f;
+            margin-top: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 12px;
+            font-size: 14px;
+            background: #08200f;
+            margin-top: 30px;
+            color: #8affb0;
+        }
+    </style>
+
+    <script>
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            alert("Nomor berhasil disalin: " + text);
+        }
+
+        function openPopup(id) {
+            document.getElementById(id).style.display = "flex";
+        }
+
+        function closePopup(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+        function submitPayment() {
+            let name = document.getElementById("name").value;
+            let amount = document.getElementById("amount").value;
+            let method = document.getElementById("method").value;
+
+            if (!name || !amount) {
+                alert("Harap isi nama dan nominal pembayaran.");
+                return;
+            }
+
+            alert(
+                "Pembayaran berhasil dikirim!\n\nNama: " + name +
+                "\nJumlah: Rp " + amount +
+                "\nMetode: " + method +
+                "\n\nAdmin akan segera mengonfirmasi."
+            );
+        }
+
+        function generateQrisFromForm() {
+            let amount = document.getElementById("amount").value;
+
+            if (!amount || amount <= 0) {
+                alert("Isi nominal pembayaran terlebih dahulu.");
+                return;
+            }
+
+            // QRIS Dynamic Auto-nominal
+            let dynamicUrl =
+                "https://prickly-ivory-qumq02lcmi-8va4z5b3kf.edgeone.dev/qr?amount=" + amount;
+
+            // tampilkan preview
+            document.getElementById("qrisPreview").style.display = "block";
+            document.getElementById("qrisImage").src = dynamicUrl;
+            document.getElementById("qrisImagePopup").src = dynamicUrl;
+
+            // buka popup otomatis
+            openPopup('popupQrisDynamic');
+        }
+    </script>
+</head>
+
+<body>
+
+<div class="header">
+    💳 Payment Gateway<br>
+    <small>Riiwwxz Store Reall</small>
+</div>
+
+<div class="card">
+    <h2>Form Pembayaran</h2>
+
+    <label>Nama Pembayar</label>
+    <input id="name" type="text" placeholder="Masukkan nama">
+
+    <label>Jumlah Pembayaran</label>
+    <input id="amount" type="number" placeholder="Masukkan nominal">
+
+    <label>Metode Pembayaran</label>
+    <select id="method">
+        <option value="BSI">BSI (7331392329)</option>
+        <option value="DANA">DANA (083897762065)</option>
+        <option value="GOPAY">GOPAY (082128399932)</option>
+        <option value="SEABANK">SEABANK (901068812599)</option>
+        <option value="QRIS">QRIS (Auto Nominal)</option>
+    </select>
+
+    <label>Upload Bukti Pembayaran</label>
+    <input id="proof" type="file" accept="image/*">
+
+    <button onclick="submitPayment()">Kirim Pembayaran</button>
+</div>
+
+<!-- QRIS Card Auto Nominal -->
+<div class="card">
+    <h2>QRIS Otomatis</h2>
+
+    <button onclick="generateQrisFromForm()">Tampilkan QRIS</button>
+
+    <div id="qrisPreview" style="margin-top: 15px; text-align:center; display:none;">
+        <img id="qrisImage" src="" style="width: 100%; max-width: 300px; border-radius: 10px; border: 2px solid #1ecc6f;">
+        <p style="color:#baffcf;">QRIS otomatis sesuai nominal pembayaran</p>
+
+        <button onclick="openPopup('popupQrisDynamic')" style="
+            padding: 10px 18px;
+            background: #12b65e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        ">Perbesar QRIS</button>
+    </div>
+</div>
+
+<!-- Daftar Metode Pembayaran -->
+<div class="card">
+    <h2>Metode Pembayaran</h2>
+
+    <div class="method">BSI: 7331392329 
+        <button onclick="copyText('7331392329')">Copy</button>
+    </div>
+
+    <div class="method">DANA: 083897762065 
+        <button onclick="copyText('083897762065')">Copy</button>
+    </div>
+
+    <div class="method">GOPAY: 082128399932 
+        <button onclick="copyText('082128399932')">Copy</button>
+    </div>
+
+    <div class="method">SEABANK: 901068812599 
+        <button onclick="copyText('901068812599')">Copy</button>
+    </div>
+</div>
+
+<!-- Bantuan Admin -->
+<div class="card">
+    <h2>Bantuan Admin</h2>
+    <button onclick="openPopup('popupAdmin')">Hubungi Admin</button>
+</div>
+
+<!-- Floating WA -->
+<div id="floatWA" onclick="window.open('https://wa.me/6283897762065','_blank')">
+    WhatsApp Admin
+</div>
+
+<!-- Popup QRIS Dynamic -->
+<div class="popup" id="popupQrisDynamic">
+    <div class="popup-content">
+        <div class="close-btn" onclick="closePopup('popupQrisDynamic')">X</div>
+        <h3>QRIS Otomatis</h3>
+        <img id="qrisImagePopup" src="" class="qris-img">
+    </div>
+</div>
+
+<!-- Popup Admin -->
+<div class="popup" id="popupAdmin">
+    <div class="popup-content">
+        <div class="close-btn" onclick="closePopup('popupAdmin')">X</div>
+        <h3>Kontak Admin</h3>
+        <button onclick="window.open('https://wa.me/6283897762065','_blank')">WhatsApp</button>
+        <button onclick="window.open('https://facebook.com','_blank')">Facebook: Rii</button>
+        <button onclick="window.open('https://instagram.com/story_kitaa10','_blank')">Instagram: @Story_Kitaa10</button>
+    </div>
+</div>
+
+<footer>
+    © 2025 Payment Gateway — Riiwwxz Developers Official 
+</footer>
+
+</body>
+    </html>            border: 1px solid #0f8f4a;
             margin-bottom: 10px;
         }
 

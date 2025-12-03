@@ -3,70 +3,279 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payment Gateway — Dori Samsul Hudori</title>
+<title>Payment Gateway — Hijau Metalik</title>
 
 <style>
+/* ======================================
+   ======  METALIC GREEN THEME  ==========
+   ====================================== */
 
-@keyframes glowPulse {
-    0% { box-shadow: 0 0 10px #00ff99; }
-    50% { box-shadow: 0 0 25px #00ffbb; }
-    100% { box-shadow: 0 0 10px #00ff99; }
+:root{
+    --dark:#063b25;
+    --mid:#0d6b3a;
+    --light:#3bf58d;
+    --glow:#96ffcf;
+    --glass:rgba(255,255,255,0.06);
+    --white:rgba(255,255,255,0.92);
+    font-family:"Poppins",sans-serif;
 }
 
-@keyframes loadingSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+body{
+    margin:0;
+    background:linear-gradient(160deg,#02150e,#063b25,#0d6b3a);
+    background-size:300% 300%;
+    animation:bgShift 12s infinite alternate ease-in-out;
+    color:var(--white);
+    padding:20px;
 }
 
-/* LOADING SCREEN */
-#loadingScreen {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: #0b1b19;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
-}
-.loader {
-    width: 55px; height: 55px;
-    border: 5px solid #00ff99;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: loadingSpin 1s linear infinite;
+@keyframes bgShift{
+    0%{background-position:0% 0%;}
+    100%{background-position:100% 100%;}
 }
 
-/* BODY */
-body {
-    font-family: Arial, sans-serif;
-    background: #081715;
-    margin: 0;
-    padding-bottom: 150px;
-    color: white;
+.container{
+    max-width:950px;
+    margin:auto;
+    background:rgba(255,255,255,0.04);
+    padding:25px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 22px rgba(0,0,0,0.4),
+               inset 0 0 18px rgba(255,255,255,0.06);
 }
 
 /* HEADER */
-.header {
-    text-align: center;
-    padding: 25px;
-    font-size: 28px;
-    color: #9affb3;
-    background: linear-gradient(145deg, #0e2a24, #123830);
-    text-shadow: 0 0 15px #00ff99;
-    animation: glowPulse 3s infinite;
+.header{
+    text-align:center;
+    margin-bottom:25px;
 }
 
-/* CARD */
-.card {
-    background: linear-gradient(145deg, #0e2a24, #143f34);
-    margin: 20px auto;
-    padding: 20px;
-    width: 90%;
-    border-radius: 18px;
-    transition: 0.2s;
-    box-shadow: 0 0 13px #00ff99;
-    border: 1px solid #0aff99;
+.header h1{
+    font-size:26px;
+    color:var(--light);
+    text-shadow:0 0 12px var(--glow);
+}
+
+.section-title{
+    font-size:18px;
+    margin:14px 0;
+    border-left:4px solid var(--light);
+    padding-left:10px;
+}
+
+/* PAYMENT CARD */
+.pay-card{
+    background:linear-gradient(135deg,#063b25,#0d6b3a,#1aa65c);
+    padding:18px;
+    margin-bottom:15px;
+    border-radius:14px;
+    box-shadow:0 0 15px rgba(0,0,0,0.45);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.pay-info{
+    width:60%;
+}
+
+.pay-info div{
+    font-size:14px;
+}
+.pay-number{
+    font-size:16px;
+    font-weight:600;
+    background:rgba(0,0,0,0.25);
+    padding:6px 10px;
+    border-radius:6px;
+    margin-top:6px;
+    letter-spacing:1px;
+}
+
+/* BUTTONS */
+.btn{
+    padding:10px 14px;
+    background:var(--mid);
+    border:none;
+    border-radius:8px;
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+    box-shadow:0 0 8px rgba(0,0,0,0.4);
+}
+.btn:active{
+    transform:scale(0.97);
+}
+
+/* QRIS */
+.qris-box{
+    text-align:center;
+    background:rgba(0,0,0,0.35);
+    padding:18px;
+    border-radius:14px;
+    margin-top:20px;
+}
+.qris-box img{
+    width:240px;
+    border-radius:12px;
+    box-shadow:0 0 18px rgba(0,0,0,0.6);
+}
+
+/* CONTACT ADMIN */
+.contact-box{
+    margin-top:25px;
+    background:rgba(255,255,255,0.07);
+    padding:18px;
+    border-radius:14px;
+}
+.contact-btn{
+    display:block;
+    margin-bottom:12px;
+    width:100%;
+    text-align:center;
+    padding:12px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:600;
+    text-decoration:none;
+    color:white;
+    background:var(--mid);
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    font-size:12px;
+    margin-top:20px;
+    opacity:0.8;
+}
+
+/* MOBILE FIX */
+@media(max-width:700px){
+    .pay-card{
+        flex-direction:column;
+        gap:10px;
+        text-align:center;
+    }
+    .pay-info{width:100%;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>💳 Payment Gateway — Hijau Metalik</h1>
+        <p>Silakan pilih metode pembayaran kamu.</p>
+    </div>
+
+    <h2 class="section-title">Metode Pembayaran</h2>
+
+    <!-- BSI -->
+    <div class="pay-card">
+        <div class="pay-info">
+            <div><b>BSI – Bank Syariah Indonesia</b></div>
+            <div>Atas Nama : <b>DORI SAMSUL HUDORI</b></div>
+            <div class="pay-number" id="bsi">7331392329</div>
+        </div>
+        <button class="btn" onclick="copyText('7331392329')">Salin</button>
+    </div>
+
+    <!-- DANA -->
+    <div class="pay-card">
+        <div class="pay-info">
+            <div><b>DANA</b></div>
+            <div>Atas Nama : <b>DORI SAMSUL HUDORI</b></div>
+            <div class="pay-number" id="dana">083897762065</div>
+        </div>
+        <button class="btn" onclick="copyText('083897762065')">Salin</button>
+    </div>
+
+    <!-- GOPAY -->
+    <div class="pay-card">
+        <div class="pay-info">
+            <div><b>GOPAY</b></div>
+            <div>Atas Nama : <b>DORI SAMSUL HUDORI</b></div>
+            <div class="pay-number" id="gopay">082128399932</div>
+        </div>
+        <button class="btn" onclick="copyText('082128399932')">Salin</button>
+    </div>
+
+    <!-- SEABANK -->
+    <div class="pay-card">
+        <div class="pay-info">
+            <div><b>SEABANK</b></div>
+            <div>Atas Nama : <b>DORI SAMSUL HUDORI</b></div>
+            <div class="pay-number" id="seabank">901068812599</div>
+        </div>
+        <button class="btn" onclick="copyText('901068812599')">Salin</button>
+    </div>
+
+    <!-- COPY ALL -->
+    <button class="btn" style="width:100%;margin-top:10px;" 
+            onclick="copyAll()">Salin Semua Metode Pembayaran</button>
+
+    <!-- QRIS -->
+    <div class="qris-box">
+        <h3>SCAN QRIS</h3>
+        <img src="https://prickly-ivory-qumq02lcmi-8va4z5b3kf.edgeone.dev/danasharepay.png">
+        <p>Gunakan aplikasi pembayaran apa saja untuk scan QRIS di atas.</p>
+    </div>
+
+    <!-- CONTACT ADMIN -->
+    <div class="contact-box">
+        <h3>Hubungi Admin Jika Ada Kendala</h3>
+
+        <a class="contact-btn"
+           href="https://wa.me/6283897762065?text=Halo%20Admin%2C%20saya%20ada%20kendala%20transaksi."
+           target="_blank">
+           💬 WhatsApp Admin
+        </a>
+
+        <a class="contact-btn"
+           href="https://facebook.com"
+           target="_blank">
+           📘 Facebook: Rii
+        </a>
+
+        <a class="contact-btn"
+           href="https://instagram.com/Story_Kitaa10"
+           target="_blank">
+           📸 Instagram: @Story_Kitaa10
+        </a>
+
+    </div>
+
+    <div class="footer">
+        Dibuat otomatis • Semua pembayaran diproses aman
+    </div>
+
+</div>
+
+<script>
+function copyText(text){
+    navigator.clipboard.writeText(text);
+    alert("Nomor berhasil disalin: " + text);
+}
+
+function copyAll(){
+    let all = `
+BSI : 7331392329
+DANA : 083897762065
+GOPAY : 082128399932
+SEABANK : 901068812599
+Atas Nama: DORI SAMSUL HUDORI
+`;
+    navigator.clipboard.writeText(all);
+    alert("Semua metode pembayaran berhasil disalin!");
+}
+</script>
+
+</body>
+    </html>    border: 1px solid #0aff99;
 }
 
 .card:hover {

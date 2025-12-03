@@ -1,1 +1,256 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Payment Gateway — By Riiwwxz Developers</title><style>@keyframes glowPulse {    0% { box-shadow: 0 0 10px #00ff99; }    50% { box-shadow: 0 0 25px #00ffbb; }    100% { box-shadow: 0 0 10px #00ff99; }}@keyframes loadingSpin {    from { transform: rotate(0deg); }    to { transform: rotate(360deg); }}/* LOADING SCREEN */#loadingScreen {    position: fixed;    top: 0; left: 0;    width: 100%; height: 100%;    background: #0b1b19;    display: flex;    justify-content: center;    align-items: center;    z-index: 99999;}.loader {    width: 55px; height: 55px;    border: 5px solid #00ff99;    border-top-color: transparent;    border-radius: 50%;    animation: loadingSpin 1s linear infinite;}/* BODY */body {    font-family: Arial, sans-serif;    background: #081715;    margin: 0;    padding-bottom: 150px;    color: white;}/* HEADER */.header {    text-align: center;    padding: 25px;    font-size: 28px;    color: #9affb3;    background: linear-gradient(145deg, #0e2a24, #123830);    text-shadow: 0 0 15px #00ff99;    animation: glowPulse 3s infinite;}/* CARD */.card {    background: linear-gradient(145deg, #0e2a24, #143f34);    margin: 20px auto;    padding: 20px;    width: 90%;    border-radius: 18px;    transition: 0.2s;    box-shadow: 0 0 13px #00ff99;    border: 1px solid #0aff99;}.card:hover {    transform: scale(1.02);    box-shadow: 0 0 22px #00ffbb;}.title {    font-size: 22px;    margin-bottom: 8px;    color: #7cffc0;}button {    background: #00ff99;    padding: 10px 15px;    border: none;    border-radius: 8px;    color: black;    width: 100%;    font-weight: bold;    cursor: pointer;    margin-top: 10px;    transition: .2s;}button:hover {    transform: scale(1.04);}/* POPUP */.popup {    display: none;    position: fixed;    top: 0; left: 0;    width: 100%; height: 100%;    background: rgba(0,0,0,.75);    justify-content: center;    align-items: center;    z-index: 9999;    backdrop-filter: blur(5px);    animation: fadeIn .3s ease;}.popup-content {    background: rgba(10, 45, 35, .85);    padding: 25px;    width: 85%;    border-radius: 18px;    text-align: center;    color: white;    position: relative;    box-shadow: 0 0 20px #00ff99;    border: 1px solid #00ff99;}/* CLOSE BUTTON */.close-btn {    position: absolute;    right: 12px;    top: 12px;    background: #ff4f4f;    color: black;    font-weight: bold;    padding: 6px 12px;    border-radius: 50%;    cursor: pointer;    transition: .3s;}.close-btn:hover {    transform: scale(1.15);}/* QR IMAGE */.qris-img {    width: 230px;    border-radius: 12px;    margin-top: 10px;    box-shadow: 0 0 20px #00ff99;}/* FLOATING CONTACT BUTTON */#floatWA {    position: fixed;    bottom: 25px;    right: 25px;    background: #00ff99;    padding: 15px 20px;    border-radius: 50px;    color: black;    font-weight: bold;    cursor: pointer;    box-shadow: 0 0 15px #00ff99;    animation: glowPulse 2.5s infinite;    z-index: 99999;}/* FOOTER */footer {    text-align: center;    padding: 15px;    font-size: 14px;    margin-top: 40px;    color: #8affc9;    opacity: .7;}</style></head><body><!-- LOADING --><div id="loadingScreen"><div class="loader"></div></div><div class="header">💳 Payment Gateway<br><small>Dori Samsul Hudori</small></div><!-- QRIS --><div class="card">    <div class="title">QRIS</div>    <button onclick="openPopup('popupQris')">Lihat QRIS</button></div><!-- PAYMENT CARDS --><div class="card"><div class="title">BSI</div><p>7331392329 — <b>DORI SAMSUL HUDORI</b></p><button onclick="copyText('7331392329')">Copy</button></div><div class="card"><div class="title">DANA</div><p>083897762065 — <b>DORI SAMSUL HUDORI</b></p><button onclick="copyText('083897762065')">Copy</button></div><div class="card"><div class="title">GOPAY</div><p>082128399932 — <b>DORI SAMSUL HUDORI</b></p><button onclick="copyText('082128399932')">Copy</button></div><div class="card"><div class="title">SEABANK</div><p>901068812599 — <b>DORI SAMSUL HUDORI</b></p><button onclick="copyText('901068812599')">Copy</button></div><!-- ADMIN CONTACT --><div class="card">    <div class="title">Butuh Bantuan?</div>    <button onclick="openPopup('popupAdmin')">Hubungi Admin</button></div><!-- FLOATING WA BUTTON --><div id="floatWA" onclick="window.open('https://wa.me/6283897762065','_blank')">    WhatsApp Admin</div><!-- POPUP QRIS --><div class="popup" id="popupQris">    <div class="popup-content">        <div class="close-btn" onclick="closePopup('popupQris')">X</div>        <h3>Scan QRIS</h3>        <img src="https://prickly-ivory-qumq02lcmi-8va4z5b3kf.edgeone.dev/danasharepay.png" class="qris-img">    </div></div><!-- POPUP ADMIN --><div class="popup" id="popupAdmin">    <div class="popup-content">        <div class="close-btn" onclick="closePopup('popupAdmin')">X</div>        <h3>Kontak Admin</h3>        <button onclick="window.open('https://wa.me/6283897762065','_blank')">WhatsApp</button>        <button onclick="window.open('https://facebook.com','_blank')">Facebook: Rii</button>        <button onclick="window.open('https://instagram.com/story_kitaa10','_blank')">Instagram: @Story_Kitaa10</button>    </div></div><!-- FOOTER --><footer>© 2025 Payment Gateway — Dori Samsul Hudori</footer><script>window.onload = () => {    setTimeout(() => {        document.getElementById("loadingScreen").style.display = "none";    }, 1000);};function copyText(text) {    navigator.clipboard.writeText(text);    alert("Berhasil disalin: " + text);}function openPopup(id) {    document.getElementById(id).style.display = "flex";}function closePopup(id) {    document.getElementById(id).style.display = "none";}</script></body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Gateway — Dori Samsul Hudori</title>
+
+<style>
+
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 10px #00ff99; }
+    50% { box-shadow: 0 0 25px #00ffbb; }
+    100% { box-shadow: 0 0 10px #00ff99; }
+}
+
+@keyframes loadingSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* LOADING SCREEN */
+#loadingScreen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #0b1b19;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+.loader {
+    width: 55px; height: 55px;
+    border: 5px solid #00ff99;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: loadingSpin 1s linear infinite;
+}
+
+/* BODY */
+body {
+    font-family: Arial, sans-serif;
+    background: #081715;
+    margin: 0;
+    padding-bottom: 150px;
+    color: white;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    padding: 25px;
+    font-size: 28px;
+    color: #9affb3;
+    background: linear-gradient(145deg, #0e2a24, #123830);
+    text-shadow: 0 0 15px #00ff99;
+    animation: glowPulse 3s infinite;
+}
+
+/* CARD */
+.card {
+    background: linear-gradient(145deg, #0e2a24, #143f34);
+    margin: 20px auto;
+    padding: 20px;
+    width: 90%;
+    border-radius: 18px;
+    transition: 0.2s;
+    box-shadow: 0 0 13px #00ff99;
+    border: 1px solid #0aff99;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 22px #00ffbb;
+}
+
+.title {
+    font-size: 22px;
+    margin-bottom: 8px;
+    color: #7cffc0;
+}
+
+button {
+    background: #00ff99;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    color: black;
+    width: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: .2s;
+}
+
+button:hover {
+    transform: scale(1.04);
+}
+
+/* POPUP */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,.75);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+    animation: fadeIn .3s ease;
+}
+
+.popup-content {
+    background: rgba(10, 45, 35, .85);
+    padding: 25px;
+    width: 85%;
+    border-radius: 18px;
+    text-align: center;
+    color: white;
+    position: relative;
+    box-shadow: 0 0 20px #00ff99;
+    border: 1px solid #00ff99;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    background: #ff4f4f;
+    color: black;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .3s;
+}
+.close-btn:hover {
+    transform: scale(1.15);
+}
+
+/* QR IMAGE */
+.qris-img {
+    width: 230px;
+    border-radius: 12px;
+    margin-top: 10px;
+    box-shadow: 0 0 20px #00ff99;
+}
+
+/* FLOATING CONTACT BUTTON */
+#floatWA {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #00ff99;
+    padding: 15px 20px;
+    border-radius: 50px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 15px #00ff99;
+    animation: glowPulse 2.5s infinite;
+    z-index: 99999;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    margin-top: 40px;
+    color: #8affc9;
+    opacity: .7;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOADING -->
+<div id="loadingScreen"><div class="loader"></div></div>
+
+<div class="header">💳 Payment Gateway<br><small>Dori Samsul Hudori</small></div>
+
+<!-- QRIS -->
+<div class="card">
+    <div class="title">QRIS</div>
+    <button onclick="openPopup('popupQris')">Lihat QRIS</button>
+</div>
+
+<!-- PAYMENT CARDS -->
+<div class="card"><div class="title">BSI</div><p>7331392329 — <b>DORI SAMSUL HUDORI</b></p><button onclick="copyText('7331392329')">Copy</button></div>
+<div class="card"><div class="title">DANA</div><p>083897762065 — <b>DORI SAMSUL HUDORI</b></p><button onclick="copyText('083897762065')">Copy</button></div>
+<div class="card"><div class="title">GOPAY</div><p>082128399932 — <b>DORI SAMSUL HUDORI</b></p><button onclick="copyText('082128399932')">Copy</button></div>
+<div class="card"><div class="title">SEABANK</div><p>901068812599 — <b>DORI SAMSUL HUDORI</b></p><button onclick="copyText('901068812599')">Copy</button></div>
+
+<!-- ADMIN CONTACT -->
+<div class="card">
+    <div class="title">Butuh Bantuan?</div>
+    <button onclick="openPopup('popupAdmin')">Hubungi Admin</button>
+</div>
+
+<!-- FLOATING WA BUTTON -->
+<div id="floatWA" onclick="window.open('https://wa.me/6283897762065','_blank')">
+    WhatsApp Admin
+</div>
+
+<!-- POPUP QRIS -->
+<div class="popup" id="popupQris">
+    <div class="popup-content">
+        <div class="close-btn" onclick="closePopup('popupQris')">X</div>
+        <h3>Scan QRIS</h3>
+        <img src="https://prickly-ivory-qumq02lcmi-8va4z5b3kf.edgeone.dev/danasharepay.png" class="qris-img">
+    </div>
+</div>
+
+<!-- POPUP ADMIN -->
+<div class="popup" id="popupAdmin">
+    <div class="popup-content">
+        <div class="close-btn" onclick="closePopup('popupAdmin')">X</div>
+        <h3>Kontak Admin</h3>
+
+        <button onclick="window.open('https://wa.me/6283897762065','_blank')">WhatsApp</button>
+        <button onclick="window.open('https://facebook.com','_blank')">Facebook: Rii</button>
+        <button onclick="window.open('https://instagram.com/story_kitaa10','_blank')">Instagram: @Story_Kitaa10</button>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>© 2025 Payment Gateway — Dori Samsul Hudori</footer>
+
+<script>
+window.onload = () => {
+    setTimeout(() => {
+        document.getElementById("loadingScreen").style.display = "none";
+    }, 1000);
+};
+
+function copyText(text) {
+    navigator.clipboard.writeText(text);
+    alert("Berhasil disalin: " + text);
+}
+
+function openPopup(id) {
+    document.getElementById(id).style.display = "flex";
+}
+
+function closePopup(id) {
+    document.getElementById(id).style.display = "none";
+}
+</script>
+
+</body>
+</html>
